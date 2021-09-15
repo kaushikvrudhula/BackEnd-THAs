@@ -1,0 +1,173 @@
+Redis redis-cli to start redis Terminal
+
+To set a key with a value SET KEY VALUE
+
+To delete a key DEL KEY
+
+To check if a key exists in the store returns 1 for true 0 for false EXISTS KEY
+
+To check the keys inside the store KEYS*
+
+To delete all the keys FLUSHALL
+
+Check Time to live or expiration time ttl KEY
+
+Set TTL or expiration time on existing key expire KEY timeInSeconds
+
+Set key with TTL SETEX KEY timeInSeconds VALUE
+
+Push a value from the left or before 0 index LPUSH KEY VALUE
+
+Push a value from the right or after last index RPUSH KEY VALUE
+
+Pop a value from the left or pop 0 index LPOP KEY VALUE
+
+Pop a value from the right or pop last index RPOP KEY VALUE
+
+Display an array type as GET only works on string can use -1 for last element like python
+
+LRANGE KEY startingIndex endingIndex
+
+Add value in set SADD KEY value
+
+Display all members in a key of Set Type SMEMBERS KEY
+
+Set a key value inside a key HSET ParentKEY KEY VALUE
+
+Get a key value inside a key HGET ParentKEY KEY VALUE
+
+Get all the keys and their value inside a key HGETALL ParentKey
+
+Delete a key inside a key HDEL parentKey Key
+
+Check if a key has a key HEXISTS parentKey key
+
+Subscribe a channel subscribe
+
+Publish a message to a channel publish
+
+Subscribe to all publishers matching a pattern psubscribe
+
+ex:- psubscribe d* subscribes all the publishers beginning with the letter d
+
+Unsubscribe a channel unsubscribe
+
+Unsubscribe to all publishers matching a pattern punsubscribe
+
+ex:- punsubscribe d* usubscribes all the publishers beginning with the letter d
+
+Add in a stream xadd
+
+additional params:
+
+use * in place of id to generate automatic timestamp id
+
+Use MAXLEN after stream name to specify the max size till it stores in stream and if more than max length automatically move or delete the old entries
+
+xadd MAXLEN <KEY
+
+Read all the messages in the stream upto a count and starting from a particular id xread COUNT 200 streams
+
+Disconnect user after a period of inactivity
+
+xread block streams
+
+Streams like pub/sub xread block 10000 streams $
+
+Access a stream with a starting id and ending id xrange
+
+Access a stream with indexes like count xrange - + count
+
+Access a stream with indexes like count but reverse xrevrange + - count
+
+POSTGRES Note- ( All commands are usually written in uppercase in postgres but with newer version you can type in lower case too )
+
+Write a semicolon after every command
+
+Login in Postgres psql -U username
+
+Create User create user with password
+
+Create database create database
+
+Grant all privileges to a user grant all privileges on database to
+
+Grant separate privilege to a user grant on database to
+
+Connect to a database \c
+
+List databases \l
+
+List all users in postgres \du
+
+Drop a database or a table or empty schema drop database
+
+drop table
+
+drop schema
+
+Create table in a database (make sure you are connected to the right database) create table ( Type Key/Constraint, . . . )
+
+Describe a table/relation schema/structure \d
+
+Quit postgres \q or quit
+
+Conditional drop drop if exists
+
+Create Schema inside a database create schema
+
+Create table inside a schema create table .( Type Key/Constraint, . . . )
+
+Drop a schema if it is not empty drop schema cascade
+
+Insert values inside a table/relation insert into (,,....) values(,,...)
+
+Display every column in a table/relation select * from
+
+Give alias to a select result (exists only for duration of a query) Select (10+10) as example
+
+Count number of records in a table/relation select count(*) from
+
+Get current time select CURRENT_TIMESTAMP
+
+Where clause or how to add a condition select * from where
+
+ex- select * from ex where age>=10 and name!=NULL;
+
+Where clause with is select * from where
+
+ex- select * from ex where age>=10 and name is not NULL;
+
+Where clause with like select * from where like
+
+queries:
+
+match starting letter but not rest assuming P
+
+P%
+
+match any character at a fixed position and length
+
+P___
+
+Find values in a range select * from where between and
+
+Find values in a provided list or a set of values select * from where in (value,value,...)
+
+Update values in a table with a condition update set =
+
+Delete values in a table with a condition delete from where
+
+In case id is not provided if we set the constraint to generated always as identity it will auto generate ex- create table hello (customer_id int generated always as identity)
+
+Type casting select * from where ::
+
+Foreign Key Create two tables and when creating second table you can add after last column after a comma
+
+foreign_key() references () on
+
+condition example
+
+delete from second table too if the key is deleted in the table the key is referenced from
+
+on delete cascade
