@@ -16,7 +16,8 @@ const readline = require("readline").createInterface({
             readline.close();
           });
           break;
-        case 2:
+        
+          case 2:
           readline.question("Enter Name of the folder\n", (folderName) => {
             fs.rmdirSync(`${folderName}`);
             console.log("done");
