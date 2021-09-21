@@ -11,7 +11,12 @@ app.use('/',(req,res) => {
   //  res.sendFile(path.join(__dirname,"public/images/84631.jpg"));
     // res.download
     //res.download(path.join(__dirname,"public/images/84631.jpg"),"download.jpg");
-    res.render('index',{title:"Express"})
+   // res.render('index',{title:"Express"})
+   res.status(201).cookie("toke","test", {
+       expire: new Date(Date.now()+ 8*3600000)
+   })
+   .cookie("hello","hello")
+   .redirect(301, "/admin")
 })
 
 app.listen(3000);
