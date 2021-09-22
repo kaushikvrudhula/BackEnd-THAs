@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const {redisClient,RedisStore,session}=require('./databases/redis');
+require('./databases/mongo');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -19,6 +20,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  store: new RedisStore({client: redisClient}),
+  secret: 'secret$123' ,
+  resave: false ,
+  saveUninitialized: false,
+  cookie : {
+    secure: false,
+    httpOnly: false,
+    maxAge: 1000 *60 *10
+  }
+}))
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
