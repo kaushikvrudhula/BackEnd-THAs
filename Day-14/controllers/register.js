@@ -1,4 +1,4 @@
-const User = require('../models/mongo');
+const User = require('../models/user');
 const saltRounds = 10;
 const bcrypt = require('bcrypt');
 const register = async (req,res) => {
@@ -13,6 +13,7 @@ const register = async (req,res) => {
 
         const newUser = new User ({email: email.toLowerCase(),password:hash,fullName})
         const savedUser = await newUser.save()
+        req.session.User = savedUser;
         res.status(201).send(savedUser);
         // Store hash in your password DBs.
     }
@@ -25,7 +26,7 @@ const register = async (req,res) => {
 const registerSuperAdmin = async (req,res) => {
     const {email,password,fullName} = req.body;
     try {
-        const alreadyExists= await User.findOne({where : {email }}).exec()
+        const alreadyExists= await User.findOne({where : {email }})
         if (alreadyExists){
             res.status(401).send("Email already exists");
         }
@@ -34,7 +35,9 @@ const registerSuperAdmin = async (req,res) => {
 
         const newUser = new User ({email: email.toLowerCase(),password:hash,fullName: "Kaushik",role: "Super-admin"})
         const savedUser = await newUser.save()
+        req.session.User = savedUser;
         res.status(201).send(savedUser);
+        
         // Store hash in your password DBs.
     }
     catch(err) {

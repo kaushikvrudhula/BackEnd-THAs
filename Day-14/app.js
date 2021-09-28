@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const {redisClient,RedisStore,session}=require('./databases/redis');
 require('./databases/mongo');
+var passport = require('passport');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -31,6 +32,8 @@ app.use(session({
     maxAge: 1000 *60 *10
   }
 }))
+app.use(passport.initialize());
+require("./middleware/passport")(passport);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
